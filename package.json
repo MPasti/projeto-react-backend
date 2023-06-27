@@ -1,0 +1,22 @@
+{
+  "name": "projeto-react-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MPasti/projeto-react-backend.git"
+  },
+  "author": "MPasti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MPasti/projeto-react-backend/issues"
+  },
+  "homepage": "https://github.com/MPasti/projeto-react-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
