@@ -1,16 +1,14 @@
 //essa const express é uma função que cria um servidor express
 const express = require("express");
 //e aqui criamos uma aplicação express
+const rotaLivro = require("./routes/livro");
+
 const app = express();
 
-const port = 8000;
+//nisso podemos acessar a rota criada no livro.js através do /livros
+app.use("/livros", rotaLivro);
 
-//o / é para mostrar a rota dele, isso quer dizer que tá na root, é o path daqui, do URL, /home /root /
-app.get("/", (req, res) => {
-  res.send("Olá, toma ta");
-});
-//req = request | res = response
-//quando nosso serviço é chamado pelo cliente | e o responde é oq devolvemos a ela
+const port = 8000;
 
 //aqui é para falar para o app ficar ouvindo as mensagens recebidas na porta 8000
 app.listen(port, () => {
