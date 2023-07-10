@@ -1,7 +1,7 @@
 //importando o router do express, para criar as rotas
 
 const { Router } = require("express");
-const { getLivros } = require("../controllers/livro");
+const { getLivros, getLivro, postLivro } = require("../controllers/livro");
 
 //criamos uma variável que resulta essa função de rotas
 const router = Router();
@@ -15,9 +15,10 @@ router.get("/", getLivros);
 //req = request | res = response
 //quando nosso serviço é chamado pelo cliente | e o responde é oq devolvemos a ela
 
-router.post("/", (req, res) => {
-  res.send("Você fez um Post");
-});
+router.get("/:id", getLivro);
+//o : significa que vai receber uma variável
+
+router.post("/", postLivro);
 
 router.patch("/", (req, res) => {
   res.send("Você fez um patch");

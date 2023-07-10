@@ -1,10 +1,1 @@
-[
-    {
-        "id": "1",
-        "nome": "Berserk"
-    },
-    {
-        "id": "2",
-        "nome": "Evangelion"
-    }
-]
+[{"id":"1","nome":"Berserk"},{"id":"2","nome":"Evangelion"},{"id":"3","nome":"One Piece"}]
