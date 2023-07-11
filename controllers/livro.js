@@ -1,9 +1,11 @@
 const fs = require("fs");
 const {
   getTodosLivros,
-  getTodosLivroPorId,
+  getLivroPorId,
   insereLivro,
-} = require("../services/livroServices");
+  modificaLivro,
+  apagaLivro,
+} = require("../services/livro");
 
 function getLivros(req, res) {
   try {
@@ -16,23 +18,43 @@ function getLivros(req, res) {
 }
 
 function getLivro(req, res) {
-  //req é o que o usuario enviou
   try {
     const id = req.params.id;
-    const livro = getTodosLivroPorId(id);
+    const livro = getLivroPorId(id);
     res.send(livro);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
 }
 
 function postLivro(req, res) {
   try {
-    const livroNovo = req.body;
-    insereLivro(livroNovo);
+    const livroInserido = insereLivro(req.body);
     res.status(201);
-    res.send("Livro inserido com sucesso");
+    res.send(livroInserido);
   } catch (error) {
     res.status(500);
-    res.send(error.message);
+    res.send({ error });
+  }
+}
+
+function patchLivro(req, res) {
+  try {
+    const livros = modificaLivro(req.params.id, req.body);
+    res.send(livros);
+  } catch (error) {
+    res.status(500);
+    res.send({ error });
+  }
+}
+function deletaLivro(req, res) {
+  try {
+    const idDeletado = deletaLivro(req.params.id);
+    res.send({ idDeletado });
+  } catch (error) {
+    res.status(500);
+    res.send({ error });
   }
 }
 
@@ -40,6 +62,8 @@ module.exports = {
   getLivros,
   getLivro,
   postLivro,
+  patchLivro,
+  deletaLivro,
 };
 
 // function getLivros(req, res) {

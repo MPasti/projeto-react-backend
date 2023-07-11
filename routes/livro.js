@@ -1,7 +1,13 @@
 //importando o router do express, para criar as rotas
 
 const { Router } = require("express");
-const { getLivros, getLivro, postLivro } = require("../controllers/livro");
+const {
+  getLivros,
+  getLivro,
+  postLivro,
+  patchLivro,
+  deletaLivro,
+} = require("../controllers/livro");
 
 //criamos uma variável que resulta essa função de rotas
 const router = Router();
@@ -20,13 +26,9 @@ router.get("/:id", getLivro);
 
 router.post("/", postLivro);
 
-router.patch("/", (req, res) => {
-  res.send("Você fez um patch");
-});
+router.patch("/:id", patchLivro);
 
-router.delete("/", (req, res) => {
-  res.send("Você fez um delete");
-});
+router.delete("/:id", deletaLivro);
 
 //nisso vamos exportar esse router para os outros arquivos usarem ele
 //tipo quando exportamos um objeto no front

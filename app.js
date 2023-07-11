@@ -4,7 +4,9 @@ const express = require("express");
 const rotaLivro = require("./routes/livro");
 
 const app = express();
-app.use(express.json);
+
+app.use(express.json());
+
 //precisamos disso para aceitar requisições de bodys tipo json
 
 //nisso podemos acessar a rota criada no livro.js através do /livros
