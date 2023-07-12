@@ -20,8 +20,15 @@ function getLivros(req, res) {
 function getLivro(req, res) {
   try {
     const id = req.params.id;
-    const livro = getLivroPorId(id);
-    res.send(livro);
+
+    if (id && Number(id)) {
+      //Number(2) -> 2 | Number(batata) -> NaN (not a number)
+      const livro = getLivroPorId(id);
+      res.send(livro);
+    } else {
+      res.status(422);
+      res.send("Id inválido");
+    }
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -31,8 +38,13 @@ function getLivro(req, res) {
 function postLivro(req, res) {
   try {
     const livroInserido = insereLivro(req.body);
-    res.status(201);
-    res.send(livroInserido);
+    if (req.body.nome) {
+      res.status(201);
+      res.send(livroInserido);
+    } else {
+      res.status(422);
+      res.send("O campo nome é obrigatório");
+    }
   } catch (error) {
     res.status(500);
     res.send({ error });
@@ -41,8 +53,18 @@ function postLivro(req, res) {
 
 function patchLivro(req, res) {
   try {
-    const livros = modificaLivro(req.params.id, req.body);
-    res.send(livros);
+    const id = req.params.id;
+
+    if (id && Number(id)) {
+      const body = req.body;
+
+      const livros = modificaLivro(id, body);
+      res.send(livros);
+      res.send("Item modificado com sucesso");
+    } else {
+      res.status(422);
+      res.send("Id inválido");
+    }
   } catch (error) {
     res.status(500);
     res.send({ error });
@@ -50,8 +72,15 @@ function patchLivro(req, res) {
 }
 function deletaLivro(req, res) {
   try {
-    const idDeletado = deletaLivro(req.params.id);
-    res.send({ idDeletado });
+    const id = req.params.id;
+
+    if (id && Number(id)) {
+      const idDeletado = apagaLivro(id);
+      res.send({ idDeletado });
+    } else {
+      res.status(422);
+      res.send("Id inválido");
+    }
   } catch (error) {
     res.status(500);
     res.send({ error });
